@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbit — Work together, effortlessly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TRACKING POINTS ON THIS PAGE
+       • page_view          — on load (fires automatically below)
+       • cta_signup_click   — "Create free account" button
+       • cta_signin_click   — "Sign in" button
+  ═══════════════════════════════════════════════════════════ -->
+
+  <div class="landing-card" data-track-section="landing">
+
+    <!-- Logo -->
+    <a href="index.html" class="logo" id="logo-home" data-track="nav_logo_home" style="margin-bottom:36px;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="#18181B"/>
+        <circle cx="14" cy="14" r="5.5" stroke="white" stroke-width="2"/>
+        <circle cx="14" cy="14" r="1.75" fill="white"/>
+      </svg>
+      <span class="logo-name">Orbit</span>
+    </a>
+
+    <p class="landing-tagline">Work together,<br>effortlessly.</p>
+    <p class="landing-sub">The workspace that keeps your team in sync — from kickoff to completion.</p>
+
+    <div class="landing-actions">
+
+      <!-- TRACKING: cta_signup_click -->
+      <a
+        id="btn-create-account"
+        href="signup.html"
+        class="btn btn-primary"
+        data-track="cta_signup_click"
+      >
+        Create free account
+      </a>
+
+      <div class="landing-divider">
+        <div class="landing-divider-line"></div>
+        <span class="landing-divider-text">or</span>
+        <div class="landing-divider-line"></div>
+      </div>
+
+      <!-- TRACKING: cta_signin_click -->
+      <a
+        id="btn-sign-in"
+        href="signin.html"
+        class="btn btn-outline"
+        data-track="cta_signin_click"
+      >
+        Sign in
+      </a>
+
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:var(--muted);line-height:1.5;">
+      By continuing you agree to our
+      <a href="#" id="link-terms" data-track="footer_terms_click" class="link-muted" style="font-weight:500;">Terms</a>
+      and
+      <a href="#" id="link-privacy" data-track="footer_privacy_click" class="link-muted" style="font-weight:500;">Privacy Policy</a>.
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // ── Page tracking ──────────────────────────────────────────
+    Track.page('Landing', { path: 'index.html' });
+
+    // ── CTA click tracking ─────────────────────────────────────
+    document.querySelectorAll('[data-track]').forEach(el => {
+      el.addEventListener('click', () => {
+        Track.event(el.dataset.track, { from: 'landing' });
+      });
+    });
+  </script>
+<!-- UX Tracker — where tracker.js lives is resolved at load time rather than
+     hardcoded, so this page works wherever it is served from. By default the
+     tracker is loaded from this page's own origin; point it elsewhere with
+     ?tracker=<base-url>, which sticks for the rest of the tab. ?tracker=dev loads this
+     tree's watch build (v1/tracker.dev.js) instead; ?tracker=local switches the tab
+     back to the production bundle. -->
+<script
+  data-ingest-url="https://klbxfkyhdtouvrdmgtry.supabase.co/functions/v1/ux-tracker-ingest"
+  data-supabase-url="https://klbxfkyhdtouvrdmgtry.supabase.co"
+  data-supabase-key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsYnhma3loZHRvdXZyZG1ndHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExMDE3NTMsImV4cCI6MjA5NjY3Nzc1M30.bx9h6NO5UUeVobJ_3xGi2a215kUOOS0NHftLCsaz09o">
+(function () {
+  // No permanent home yet: the tracker is served alongside this page.
+  // When the project gets a host, put its base URL here to enable
+  // ?tracker=hosted; until then every page loads from the tree it is served from.
+  var HOSTED = '';
+  var KEY = 'uxt_tracker_base';
+  var FILE_KEY = 'uxt_tracker_file';
+  var FILE = '/v1/tracker.js';
+  var loader = document.currentScript;
+  var base = null;
+  // The tree this page is served from: one level up, since prototype pages
+  // live in <base>/login-test/. Derived rather than taken from location.origin
+  // so the same markup works at a domain root and under a subpath such as
+  // GitHub Pages' /<repo>/.
+  var HERE = location.origin;
+  try { HERE = new URL('..', location.href).href.replace(/[/]+$/, ''); } catch (e) {}
+
+  try { base = new URLSearchParams(location.search).get('tracker'); } catch (e) {}
+  if (base === 'local') base = HERE;
+  else if (base === 'dev') { base = HERE; FILE = '/v1/tracker.dev.js'; }
+  else if (base === 'hosted') base = HOSTED || HERE;
+  else if (base) base = base.replace(/[/]+$/, '');
+
+  // Remember the choice (base and bundle file) so the rest of a multi-page
+  // prototype follows it; any ?tracker= value rewrites both.
+  if (base) { try { sessionStorage.setItem(KEY, base); sessionStorage.setItem(FILE_KEY, FILE); } catch (e) {} }
+  else { try { base = sessionStorage.getItem(KEY); FILE = sessionStorage.getItem(FILE_KEY) || FILE; } catch (e) {} }
+
+  // Nothing asked for: load the tracker from the tree this page is served from.
+  if (!base) base = HOSTED || HERE;
+
+  var s = document.createElement('script');
+  s.src = base + FILE;
+  s.async = false;
+  for (var i = 0; i < loader.attributes.length; i++) {
+    var a = loader.attributes[i];
+    if (a.name.indexOf('data-') === 0) s.setAttribute(a.name, a.value);
+  }
+  s.onerror = function () {
+    console.error('[UXTracker] loader: could not load ' + s.src + ' — build it with `' +
+      (FILE.indexOf('.dev.') > -1 ? 'npm run dev' : 'npm run build') + '`, or pass ?tracker=<base-url>.');
+  };
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>
