@@ -1,0 +1,3 @@
+* text=auto
+# Copied byte-for-byte from ux-tracker; never let git touch line endings.
+v1/tracker.js -text

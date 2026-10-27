@@ -1,0 +1,6 @@
+# Local notes for Claude; this repo is public and its root is served on GitHub Pages.
+CLAUDE.local.md
+HANDOFF.md
+.claude/settings.local.json
+
+node_modules/
