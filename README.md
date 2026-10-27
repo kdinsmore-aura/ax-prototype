@@ -19,5 +19,8 @@ v1/           shared interaction tracker, copied in from the tracker repo
 - Folder and file names identify screens in recorded studies. Use lowercase, hyphenated names, and
   never rename, move, or overwrite a folder once a study has used it. A revised prototype goes in a
   new folder (for example `login-test-v2/`).
+- Top-level folders whose names start with `_` (for example `_login-test-v3/`) are drafts. Git
+  ignores them, so they are never committed or published. Rename a draft to its final name to
+  publish it.
 - `v1/tracker.js` is shared by every prototype and is never edited here; it is only replaced with a
   new copy from the tracker repo.

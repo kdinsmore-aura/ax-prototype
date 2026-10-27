@@ -4,3 +4,6 @@ HANDOFF.md
 .claude/settings.local.json
 
 node_modules/
+
+# Draft prototypes: any top-level folder starting with "_" stays local and is never published.
+/_*/
